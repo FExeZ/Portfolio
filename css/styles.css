@@ -1,0 +1,135 @@
+.container-projects {
+  display: grid !important;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media screen and (min-width: 768px) {
+  .container-projects {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.project {
+  background-color: #ffcae9;
+  padding: 10px;
+  border-radius: 10px;
+  box-shadow: 2px 10px 10px rgba(0, 0, 0, 0.4);
+}
+
+.project:hover {
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+}
+
+.project a {
+  color: black;
+  text-decoration: none;
+}
+
+.custom-header {
+  background-color: #bcf4de;
+  color: #000000;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.body {
+  background-color: #ffd9da;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.bg-primary {
+  background-color: #2d3047 !important;
+  color: white !important;
+}
+
+.custom-header-projects {
+  background-color: #bcf4de;
+  color: #000000;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.about-section-me .card {
+  background-color: #ffcae9;
+  border-radius: 20px;
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease;
+}
+
+.about-section-me .card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+}
+
+.about-section-me img {
+  border: 1px solid #2d3047;
+  padding: 1px;
+  background-color: white;
+  max-height: 150px;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .about-section-me .card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-section-me img {
+    margin-bottom: 15px;
+  }
+}
+
+#contenido-personal img,
+#titulo,
+#descripcion {
+  min-height: 20px;
+  transition: min-height 0.5s ease;
+}
+
+.fade {
+  opacity: 0;
+
+  transition: opacity 0.8s ease;
+}
+
+.fade.show {
+  opacity: 1;
+}
+
+.contact-links a i {
+  font-size: 2.5rem;
+  color: gray;
+  transition: color 0.3s ease;
+}
+
+.contact-links a i:hover {
+  color: #000000;
+}
+
+button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 0;
+  background-color: #ffcae9;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-shadow: #b984a3 0px 10px 0px 0px;
+  color: #000000;
+  cursor: pointer;
+}
+
+button:hover {
+  box-shadow: #b984a3 0px 7px 0px 0px;
+}
+
+button:active {
+  background-color: #ffcae9;
+  box-shadow: #b984a3 0px 0px 0px 0px;
+  transform: translateY(5px);
+  transition: 200ms;
+}
