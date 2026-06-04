@@ -1,0 +1,47 @@
+<!-- ── Sobre mí (professional bio) ─────────────────────────────── -->
+<section id="about" class="about-section">
+  <div class="section-inner reveal" appScrollReveal>
+
+    <h2 class="section-title">Sobre <span class="highlight">Mí</span></h2>
+
+    <div class="bio-text">
+      <p>
+        Soy desarrollador con especial interés en el backend, con experiencia en Java y Spring,
+        y conocimientos en tecnologías frontend como Angular, React y Bootstrap.
+      </p>
+      <p>
+        Me apasiona crear soluciones eficientes y bien estructuradas, priorizando el rendimiento
+        y la escalabilidad. Actualmente curso la carrera de Ingeniería en Informática y sigo
+        explorando nuevas herramientas y desafíos para mejorar mis habilidades en el desarrollo
+        de software.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── Acerca de mí (personal carousel) ───────────────────────── -->
+<section class="personal-section">
+  <div class="section-inner reveal" appScrollReveal>
+
+    <h2 class="section-title">Acerca de <span class="highlight">Mí</span> ☕</h2>
+
+    <div class="card-personal" [class.fade-out]="animating()">
+      <img [src]="current().imagen" [alt]="current().titulo" />
+      <div class="card-personal-body">
+        <h3>{{ current().titulo }}</h3>
+        <p>{{ current().descripcion }}</p>
+      </div>
+    </div>
+
+    <div class="carousel-controls">
+      <button class="btn-nav" (click)="navigate(-1)">← Anterior</button>
+      <span class="dots">
+        <span *ngFor="let item of datos; let i = index" class="dot" [class.active]="i === currentIndex()">
+        </span>
+      </span>
+      <button class="btn-nav" (click)="navigate(1)">Siguiente →</button>
+    </div>
+
+  </div>
+</section>

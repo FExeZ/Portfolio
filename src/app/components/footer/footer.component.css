@@ -1,0 +1,17 @@
+.footer {
+  background: #020617;
+  border-top: 1px solid #1e293b;
+  text-align: center;
+  padding: 2rem 1.5rem;
+  color: #475569;
+}
+
+.footer-inner p {
+  margin: 0;
+}
+
+.footer-sub {
+  font-size: 0.85rem;
+  margin-top: 0.4rem !important;
+  color: #334155;
+}

@@ -1,0 +1,18 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="#home" class="logo" (click)="scrollTo('home', $event)">Franco Zerda</a>
+
+    <button class="menu-toggle" (click)="toggleMenu()" aria-label="Abrir menú">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="nav-links" [class.open]="isMenuOpen">
+      <a href="#home"     (click)="scrollTo('home', $event)">Inicio</a>
+      <a href="#about"    (click)="scrollTo('about', $event)">Sobre mí</a>
+      <a href="#projects" (click)="scrollTo('projects', $event)">Proyectos</a>
+      <a href="#contact"  (click)="scrollTo('contact', $event)">Contacto</a>
+    </div>
+  </div>
+</nav>
