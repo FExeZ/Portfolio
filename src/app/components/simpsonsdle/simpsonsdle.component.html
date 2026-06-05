@@ -1,0 +1,44 @@
+<!-- ── Simpsonsdle (proyecto destacado) ─────────────────────────── -->
+<section id="simpsonsdle" class="simpsonsdle-section">
+  <div class="section-inner reveal" appScrollReveal>
+
+    <h2 class="section-title">{{ t().simpsonsdle.titlePre }} <span class="highlight">{{ t().simpsonsdle.titleHi }}</span> <i class="bi bi-controller sd-title-icon"></i></h2>
+
+    <div class="sd-grid">
+
+      <!-- Historia / texto -->
+      <div class="sd-content">
+        <span class="live-pill"><span class="live-dot"></span>{{ t().simpsonsdle.live }}</span>
+
+        <p class="sd-lead" [innerHTML]="t().simpsonsdle.lead"></p>
+        <p class="sd-text" [innerHTML]="t().simpsonsdle.p1"></p>
+        <p class="sd-text">{{ t().simpsonsdle.p2 }}</p>
+
+        <div class="sd-tech">
+          <span class="tech-chip">Angular</span>
+          <span class="tech-chip">Spring</span>
+          <span class="tech-chip">PostgreSQL</span>
+        </div>
+      </div>
+
+      <!-- Mockup navegador con el logo -->
+      <div class="sd-visual reveal delay-1" appScrollReveal>
+        <div class="browser-mock">
+          <div class="browser-bar">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+            <span class="browser-url">simpsonsdle.com</span>
+          </div>
+          <div class="browser-body">
+            <img src="assets/Title.png" alt="Logo de Simpsonsdle" class="sd-logo" />
+            <a href="https://www.simpsonsdle.com" target="_blank" rel="noopener" class="mock-cta">
+              {{ t().simpsonsdle.play }}
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

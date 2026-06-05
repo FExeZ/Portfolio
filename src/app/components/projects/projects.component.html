@@ -1,23 +1,38 @@
 <section id="projects" class="projects-section">
   <div class="section-inner reveal" appScrollReveal>
-    <h2 class="section-title">Mis <span class="highlight">Proyectos</span> <i class="bi bi-file-earmark-check"></i></h2>
+    <h2 class="section-title">{{ t().projects.titlePre }} <span class="highlight">{{ t().projects.titleHi }}</span> <i class="bi bi-file-earmark-check proj-title-icon"></i></h2>
+
+    <!-- ── Filtros ── -->
+    <div class="filters">
+      <button *ngFor="let filter of filters" class="filter-btn"
+              [class.active]="activeFilter() === filter"
+              (click)="setFilter(filter)">
+        {{ filterLabel(filter) }}
+      </button>
+    </div>
+    <p class="filter-count">
+      {{ t().projects.showingPre }} {{ filteredProjects().length }} {{ t().projects.showingMid }} {{ projects.length }} {{ t().projects.showingPost }}
+    </p>
 
     <div class="projects-grid">
-      <div *ngFor="let project of projects" class="project-card">
+      <div *ngFor="let project of filteredProjects(); let i = index; trackBy: trackByFilter"
+           class="project-card" [style.animation-delay.ms]="i * 70">
 
         <div class="card-header">
           <span class="badge" [ngClass]="badgeClass(project.type)">{{ project.type }}</span>
-          <a [href]="project.repoUrl" target="_blank" class="repo-link" aria-label="Ver repositorio en GitHub">
+          <a [href]="project.repoUrl" target="_blank" rel="noopener" class="repo-link" aria-label="GitHub">
             <i class="bi bi-github"></i>
           </a>
         </div>
 
-        <h3 class="project-title">{{ project.title }}</h3>
-        <p class="project-desc">{{ project.description }}</p>
+        <h3 class="project-title">{{ project.title[lang()] }}</h3>
+        <p class="project-desc">{{ project.description[lang()] }}</p>
 
         <div class="project-meta">
-          <p><strong>Rol:</strong> {{ project.role }}</p>
-          <p><strong>Tecnologías:</strong> {{ project.technologies.join(', ') }}</p>
+          <p class="project-role"><strong>{{ t().projects.role }}</strong> {{ project.role[lang()] }}</p>
+          <div class="tech-chips">
+            <span *ngFor="let tech of project.technologies" class="tech-chip">{{ tech }}</span>
+          </div>
         </div>
 
       </div>

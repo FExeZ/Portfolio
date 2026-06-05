@@ -66,6 +66,35 @@
   width: 100%;
 }
 
+/* Toggle de idioma */
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748b;
+  transition: all 0.25s ease;
+}
+
+.lang-toggle:hover {
+  border-color: var(--primary-color);
+}
+
+.lang-toggle span.active {
+  color: var(--primary-color);
+}
+
+.lang-toggle .lang-sep {
+  color: #475569;
+  font-weight: 400;
+}
+
 /* Hamburger */
 .menu-toggle {
   display: none;

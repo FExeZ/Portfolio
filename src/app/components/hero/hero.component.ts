@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive';
+import { LanguageService } from '../../services/language.service';
 
 @Component({
   selector: 'app-hero',
@@ -8,4 +9,6 @@ import { ScrollRevealDirective } from '../../directives/scroll-reveal.directive'
   templateUrl: './hero.component.html',
   styleUrls: ['./hero.component.css']
 })
-export class HeroComponent {}
+export class HeroComponent {
+  t = inject(LanguageService).t;
+}

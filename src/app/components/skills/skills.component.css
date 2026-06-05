@@ -12,37 +12,137 @@
   font-size: 2.2rem;
   font-weight: 800;
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 3rem;
   color: #fff;
+}
+
+.section-title i {
+  color: var(--primary-color);
 }
 
 .highlight {
   color: var(--primary-color);
 }
 
+/* ── Grid de categorías ── */
 .skills-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
 }
 
-.skill-tag {
-  background: #0f172a;
+.skill-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.skill-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--primary-color);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
+.skill-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.skill-card-header i {
+  font-size: 1.4rem;
   color: var(--primary-color);
+}
+
+.skill-card-header h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* ── Chips de tecnología ── */
+.skill-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.skill-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #0f172a;
   border: 1px solid #334155;
-  padding: 0.5rem 1.4rem;
-  border-radius: 999px;
-  font-size: 0.9rem;
+  color: #e2e8f0;
+  padding: 0.45rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.85rem;
   font-weight: 600;
-  cursor: default;
   transition: all 0.25s ease;
 }
 
-.skill-tag:hover {
-  background: var(--primary-color);
-  color: #fff;
+.skill-chip:hover {
   border-color: var(--primary-color);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+  transform: translateY(-2px);
+}
+
+.skill-chip i {
+  font-size: 1.15rem;
+}
+
+/* ── Certificaciones ── */
+.subsection-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #fff;
+  margin: 4rem 0 2rem;
+}
+
+.subsection-title i {
+  color: var(--accent-color);
+}
+
+.cert-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+}
+
+.cert-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  padding: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.cert-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-color);
+}
+
+.cert-card > i {
+  font-size: 1.8rem;
+  color: var(--accent-color);
+  flex-shrink: 0;
+}
+
+.cert-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  line-height: 1.3;
+}
+
+.cert-issuer {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  margin-top: 0.2rem;
 }

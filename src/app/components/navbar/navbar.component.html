@@ -9,10 +9,17 @@
     </button>
 
     <div class="nav-links" [class.open]="isMenuOpen">
-      <a href="#home"     (click)="scrollTo('home', $event)">Inicio</a>
-      <a href="#about"    (click)="scrollTo('about', $event)">Sobre mí</a>
-      <a href="#projects" (click)="scrollTo('projects', $event)">Proyectos</a>
-      <a href="#contact"  (click)="scrollTo('contact', $event)">Contacto</a>
+      <a href="#home"        (click)="scrollTo('home', $event)">{{ t().nav.home }}</a>
+      <a href="#about"       (click)="scrollTo('about', $event)">{{ t().nav.about }}</a>
+      <a href="#simpsonsdle" (click)="scrollTo('simpsonsdle', $event)">Simpsonsdle</a>
+      <a href="#projects"    (click)="scrollTo('projects', $event)">{{ t().nav.projects }}</a>
+      <a href="#contact"     (click)="scrollTo('contact', $event)">{{ t().nav.contact }}</a>
+
+      <button class="lang-toggle" (click)="toggleLang()" aria-label="Cambiar idioma / Switch language">
+        <span [class.active]="lang() === 'es'">ES</span>
+        <span class="lang-sep">/</span>
+        <span [class.active]="lang() === 'en'">EN</span>
+      </button>
     </div>
   </div>
 </nav>
