@@ -1,0 +1,99 @@
+:host {
+  display: block;
+}
+
+/* Borde doble azul y amarillo, como las cajas de texto de los RPG de 16 bits. */
+.dialog {
+  position: relative;
+  display: flex;
+  gap: 1.2em;
+  align-items: flex-start;
+  padding: 1em 1.4em 1.2em;
+  background: var(--fz-black);
+  border: 4px solid var(--fz-blue);
+  box-shadow: inset 0 0 0 2px var(--fz-yellow);
+  cursor: pointer;
+}
+
+.memory {
+  flex: none;
+  width: var(--memory-width, 160px);
+  height: auto;
+  aspect-ratio: 4 / 3;
+}
+
+.body {
+  min-width: 0;
+  flex: 1;
+}
+
+.compact {
+  display: block;
+  padding: 0.6em 0.8em 1em;
+}
+
+.compact .memory {
+  float: left;
+  margin: 0.2em 0.8em 0.4em 0;
+}
+
+.name {
+  margin-bottom: 0.6em;
+  font-family: var(--font-pixel);
+  font-size: var(--dialog-name-size, 14px);
+  font-weight: 400;
+  color: var(--fz-yellow);
+}
+
+.text {
+  font-family: var(--font-body);
+  font-size: var(--dialog-text-size, 26px);
+  line-height: 1.2;
+  color: var(--fz-white);
+}
+
+.rest {
+  visibility: hidden;
+}
+
+/*
+ * El ▼ tiene el foco, así que siempre se ve (RF-69): gris mientras la página se escribe,
+ * amarillo y titilando cuando está completa y A pasa a la siguiente.
+ */
+.advance {
+  position: absolute;
+  right: 0.6em;
+  bottom: 0.3em;
+  padding: 0.2em 0.4em;
+  border: 0;
+  background: none;
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  color: var(--fz-gray);
+}
+
+.advance.ready {
+  color: var(--fz-yellow);
+  animation: blink 0.8s steps(1) infinite;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@keyframes blink {
+  50% {
+    color: var(--fz-gray);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .advance.ready {
+    animation: none;
+  }
+}

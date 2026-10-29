@@ -1,0 +1,73 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+/* Como en los juegos: los créditos frenan con el final al pie y lo que ya pasó queda arriba, fuera de la pantalla. */
+.credits {
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  align-content: unsafe end;
+  padding: 6% 7% 0;
+  font-family: var(--font-pixel);
+  font-size: var(--small-size);
+  text-align: center;
+}
+
+.credits:focus {
+  outline: none;
+}
+
+/* Arrancan justo debajo del borde y suben hasta su lugar. El margen de abajo va adentro
+   del rollo para que translateY(100%) lo deje entero fuera de la pantalla. */
+.roll {
+  display: grid;
+  gap: 2.4em;
+  padding-bottom: 3em;
+  animation: roll 12s linear both;
+}
+
+dl {
+  display: grid;
+  gap: 1.8em;
+}
+
+dt {
+  color: var(--fz-gray);
+  margin-bottom: 0.6em;
+}
+
+dd {
+  font-size: var(--menu-size);
+  line-height: 1.4;
+  color: var(--fz-white);
+}
+
+.end {
+  font-size: var(--title-size);
+  color: var(--fz-yellow);
+  text-shadow: 0.1em 0.1em 0 var(--fz-blue);
+}
+
+.copyright {
+  color: var(--fz-gray);
+}
+
+@keyframes roll {
+  from {
+    transform: translateY(100%);
+  }
+}
+
+/* Quietos, una línea debajo de la otra, con scroll si no entran. */
+@media (prefers-reduced-motion: reduce) {
+  .credits {
+    overflow-y: auto;
+    align-content: safe center;
+  }
+
+  .roll {
+    animation: none;
+  }
+}

@@ -1,0 +1,66 @@
+/* Ocupa lo mismo que la habitación; solo los botones reciben el puntero. */
+:host {
+  position: absolute;
+  pointer-events: none;
+}
+
+.drawing,
+.hits {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.drawing {
+  overflow: visible;
+}
+
+.hit {
+  position: absolute;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+/* El marco de resaltado es el indicador de foco: la cámara achicaría un borde común (RF-69). */
+.hit:focus-visible {
+  outline: none;
+}
+
+.frame {
+  stroke: var(--fz-yellow);
+  animation: blink 1s steps(1) infinite;
+}
+
+/* RF-35: la mascota elegida da un salto corto. */
+.hop {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  animation: hop 400ms ease-out;
+}
+
+/* Titila cambiando de color, sin apagarse: es el indicador de foco y tiene que verse siempre. */
+@keyframes blink {
+  50% {
+    stroke: var(--fz-white);
+  }
+}
+
+@keyframes hop {
+  40% {
+    transform: translateY(-4px) scaleY(1.05);
+  }
+  70% {
+    transform: translateY(0) scaleY(0.95);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .frame,
+  .hop {
+    animation: none;
+  }
+}

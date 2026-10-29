@@ -1,0 +1,56 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+/* Avatar a la izquierda y datos a la derecha, en la tele y en la Pocket. */
+.player {
+  height: 100%;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 6%;
+  padding: 7%;
+}
+
+/* Múltiplos de 48 px: cada píxel del avatar ocupa un número entero de píxeles de la pantalla. */
+.avatar {
+  width: 96px;
+  width: round(down, min(35cqw, 45cqh), 48px);
+  height: auto;
+  image-rendering: pixelated;
+  border: 4px solid var(--fz-blue);
+  box-sizing: content-box;
+}
+
+.data {
+  display: grid;
+  gap: 1.2em;
+  font-family: var(--font-pixel);
+  font-size: var(--menu-size);
+}
+
+.name {
+  font-size: var(--menu-size);
+  font-weight: 400;
+  color: var(--fz-white);
+  text-shadow: 0.1em 0.1em 0 var(--fz-blue);
+}
+
+.stats {
+  display: grid;
+  gap: 0.8em;
+}
+
+dt {
+  font-size: var(--small-size);
+  color: var(--fz-gray);
+  margin-bottom: 0.3em;
+}
+
+dd {
+  font-size: calc(var(--menu-size) * 0.75);
+  line-height: 1.4;
+  color: var(--fz-yellow);
+}

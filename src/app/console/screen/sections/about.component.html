@@ -1,0 +1,47 @@
+@let text = t().console;
+
+@if (pocket()) {
+  @let room = view();
+  <section class="pocket-room" [attr.aria-label]="text.menu.about">
+    @if (world(); as world) {
+      <div
+        class="world"
+        [class.moving]="store.state().transitioning && !store.reducedMotion()"
+        [style.width.px]="world.width"
+        [style.height.px]="world.height"
+        [style.transform]="world.transform"
+      >
+        <app-room-base class="layer" [on]="true" />
+        <app-room-scene
+          class="layer"
+          [interactive]="exploring()"
+          [cursor]="room?.cursor ?? 0"
+          [pet]="room?.pet ?? null"
+          [highlight]="highlight()"
+          [cyclone]="store.state().cyclone"
+          (point)="store.dispatch({ type: 'point', index: $event })"
+          (pick)="store.dispatch({ type: 'pick', index: $event })"
+        />
+      </div>
+    }
+
+    @if (objectName(); as name) {
+      <p class="object-name" aria-hidden="true">▶ {{ name }}</p>
+    }
+
+    @if (dialog(); as content) {
+      <app-dialog-box
+        class="dialog"
+        [content]="content"
+        [typed]="store.typed()"
+        [compact]="true"
+        (advance)="store.dispatch({ type: 'confirm' })"
+      />
+    }
+  </section>
+} @else {
+  <section class="about" [attr.aria-label]="text.menu.about">
+    <h2 class="title">{{ text.menu.about }}</h2>
+    <p class="hint">{{ text.room.hint }}</p>
+  </section>
+}

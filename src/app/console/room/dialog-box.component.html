@@ -1,0 +1,28 @@
+@let page = content();
+
+<section
+  class="dialog"
+  [class.compact]="compact()"
+  [attr.aria-label]="page.name"
+  (click)="advance.emit()"
+>
+  @if (page.memory; as memory) {
+    <app-pixel-sprite class="memory" [sprite]="memory" />
+  }
+  <div class="body">
+    <h2 class="name">{{ page.name }}</h2>
+    <p class="text" aria-hidden="true">{{ shown() }}<span class="rest">{{ rest() }}</span></p>
+    <!-- El lector de pantalla recibe la página entera una sola vez, no letra por letra. -->
+    <p class="sr-only" aria-live="polite">{{ page.text }}</p>
+  </div>
+  <button
+    #button
+    type="button"
+    class="advance"
+    data-console-item
+    [class.ready]="!page.typing"
+    [attr.aria-label]="page.last && !page.typing ? t().console.room.close : t().console.room.next"
+  >
+    <span aria-hidden="true">▼</span>
+  </button>
+</section>

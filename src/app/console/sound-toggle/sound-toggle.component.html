@@ -1,0 +1,20 @@
+<button
+  type="button"
+  class="toggle"
+  [attr.aria-label]="t().console.soundToggle"
+  [attr.aria-pressed]="on()"
+  (click)="toggle($event)"
+>
+  <!-- Parlante en pixel art sobre una grilla de 16 × 16 -->
+  <svg viewBox="0 0 16 16" shape-rendering="crispEdges" aria-hidden="true">
+    <path d="M2 6h3v4H2z M5 5h1v6H5z M6 4h1v8H6z M7 3h1v10H7z" fill="currentColor" />
+    @if (on()) {
+      <path d="M10 6h1v4h-1z M12 4h1v8h-1z" fill="currentColor" />
+    } @else {
+      <path
+        class="cross"
+        d="M10 5h1v1h-1z M11 6h1v1h-1z M12 7h1v1h-1z M13 8h1v1h-1z M14 9h1v1h-1z M14 5h1v1h-1z M13 6h1v1h-1z M11 8h1v1h-1z M10 9h1v1h-1z"
+      />
+    }
+  </svg>
+</button>

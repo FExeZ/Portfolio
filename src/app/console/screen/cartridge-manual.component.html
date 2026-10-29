@@ -1,0 +1,36 @@
+@let text = t().console.projects;
+@let item = manual();
+
+<article class="manual" [class.gold]="item.gold">
+  <header class="head">
+    <app-pixel-sprite class="icon" [sprite]="item.sprite" />
+    <h2 class="title">{{ item.title }}</h2>
+    @if (item.live) {
+      <span class="live"><span class="dot" aria-hidden="true"></span>{{ text.live }}</span>
+    }
+  </header>
+
+  @for (paragraph of item.paragraphs; track $index) {
+    <p class="text">{{ paragraph }}</p>
+  }
+
+  <h3 class="subtitle">{{ text.technologies }}</h3>
+  <ul class="chips">
+    @for (technology of item.technologies; track technology) {
+      <li class="chip">{{ technology }}</li>
+    }
+  </ul>
+
+  <a
+    #link
+    data-console-item
+    class="action"
+    [href]="item.url"
+    target="_blank"
+    rel="noopener"
+    (click)="onClick($event)"
+  >
+    <span class="cursor" aria-hidden="true"></span>{{ item.actionLabel }}
+    <span class="sr-only">{{ text.opensNewTab }}</span>
+  </a>
+</article>

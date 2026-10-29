@@ -1,59 +1,52 @@
-# Portfolio
+# FZ-16: portfolio de Franco Zerda
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
+Portfolio de Franco Zerda, desarrollador full stack, armado como una consola retro de 16 bits. El visitante entra a una habitación, enciende la consola FZ-16 y recorre el contenido como si jugara: la ficha de jugador, la historia detrás de cada objeto de la habitación, las skills, los proyectos, Simpsonsdle y el contacto. Funciona en español y en inglés, con una carcasa de escritorio y otra portátil para el celular.
 
-## Development server
+El sitio está publicado en https://fexez.github.io/Portfolio/. Para quien prefiere leer sin la consola, todo el contenido está también en una versión texto, en https://fexez.github.io/Portfolio/#/text.
 
-To start a local development server, run:
+## Requisitos
 
-```bash
-ng serve
-```
+Node.js en una versión compatible con Angular 21 y npm.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## Instalación y ejecución
 
 ```bash
-ng generate component component-name
+npm install
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
 ```bash
-ng generate --help
+npm start
 ```
 
-## Building
+El servidor de desarrollo queda en `http://localhost:4200/`.
 
-To build the project run:
+## Tests
 
 ```bash
-ng build
+npm test -- --watch=false
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Los tests usan Vitest. La lógica de la consola es TypeScript puro y está cubierta con tests: navegación, cámara, sonidos, preferencias y juego.
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Build y publicación
 
 ```bash
-ng test
+npm run build
 ```
 
-## Running end-to-end tests
+El sitio se publica en GitHub Pages con `npm run deploy`, que compila con la ruta base `/Portfolio/` y sube el build a la rama `gh-pages`.
 
-For end-to-end (e2e) testing, run:
+## Estructura
 
-```bash
-ng e2e
-```
+La aplicación vive en `src/app/console/`:
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- `core/`: la lógica pura. Un reducer recibe el estado y una acción y devuelve el estado nuevo, sin tocar el navegador.
+- `content/`: los textos en los dos idiomas y los dibujos en pixel art, escritos como texto.
+- `console.store.ts`: el único lugar que usa las APIs del navegador (temporizadores, guardado, historial y audio).
+- Componentes de las carcasas, la pantalla, la habitación y el modo texto.
 
-## Additional Resources
+Las traducciones de la interfaz están en `src/app/i18n/translations.ts`.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Recursos
+
+Los dibujos son pixel art original, y los sonidos se sintetizan con Web Audio, sin archivos de audio. Las fuentes Press Start 2P y VT323 están en `src/fonts/`, con sus licencias OFL.

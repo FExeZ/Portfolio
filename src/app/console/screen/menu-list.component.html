@@ -1,0 +1,60 @@
+<nav [attr.aria-label]="label()">
+  <ul class="list">
+    @for (item of items(); track $index) {
+      <li>
+        <!-- Un ítem con href es un link de verdad: Ctrl + clic o la rueda abren donde el navegador quiera. -->
+        @if (item.href) {
+          <a
+            #entry
+            data-console-item
+            class="item"
+            [class.active]="$index === cursor()"
+            [href]="item.href"
+            [attr.target]="item.newTab ? '_blank' : null"
+            [attr.rel]="item.newTab ? 'noopener' : null"
+            [attr.tabindex]="$index === cursor() ? 0 : -1"
+            [attr.aria-current]="$index === cursor() ? 'true' : null"
+            (pointermove)="onPointerMove($index)"
+            (click)="onLinkClick($event, $index)"
+          >
+            <ng-container *ngTemplateOutlet="content; context: { $implicit: item }" />
+            @if (item.newTab) {
+              <span class="sr-only">{{ t().console.projects.opensNewTab }}</span>
+            }
+          </a>
+        } @else {
+          <button
+            #entry
+            data-console-item
+            type="button"
+            class="item"
+            [class.active]="$index === cursor()"
+            [attr.tabindex]="$index === cursor() ? 0 : -1"
+            [attr.aria-current]="$index === cursor() ? 'true' : null"
+            [attr.aria-label]="item.value ? item.label + ': ' + item.value : item.icon ? item.label : null"
+            (pointermove)="onPointerMove($index)"
+            (click)="pick.emit($index)"
+          >
+            <ng-container *ngTemplateOutlet="content; context: { $implicit: item }" />
+          </button>
+        }
+      </li>
+    }
+  </ul>
+</nav>
+
+<ng-template #content let-item>
+  <span class="cursor" aria-hidden="true"></span>
+  @if (item.icon) {
+    <span class="icon" aria-hidden="true">
+      <app-pixel-sprite [sprite]="item.icon" />
+      @if (item.iconText) {
+        <span class="icon-text">{{ item.iconText }}</span>
+      }
+    </span>
+  }
+  <span class="label">{{ item.label }}</span>
+  @if (item.value) {
+    <span class="value">{{ item.value }}</span>
+  }
+</ng-template>

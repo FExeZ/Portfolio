@@ -1,0 +1,99 @@
+.list {
+  list-style: none;
+  display: grid;
+  gap: 0.7em;
+}
+
+.item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8em;
+  width: 100%;
+  font-family: var(--font-pixel);
+  font-size: var(--menu-size, 16px);
+  color: var(--fz-blue-light);
+  text-align: left;
+}
+
+/* El foco siempre está en el ítem activo (roving tabindex): el cursor y el color
+   amarillo son el indicador de foco, así que no hace falta el recuadro. */
+.item.active {
+  color: var(--fz-yellow);
+}
+
+.item:focus-visible {
+  outline: none;
+}
+
+a.item {
+  text-decoration: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+/* Triángulo dibujado: el carácter ► no está en el subconjunto latino de la fuente. */
+.cursor {
+  flex: none;
+  width: 0.7em;
+  height: 0.8em;
+  background: var(--fz-yellow);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  visibility: hidden;
+}
+
+.active .cursor {
+  visibility: visible;
+  animation: blink 1s steps(1) infinite;
+}
+
+/* Quien usa la lista puede ocultar el texto y dejar solo los íconos; el nombre queda en aria-label. */
+.label {
+  display: var(--menu-label-display, inline);
+}
+
+.value {
+  margin-left: auto;
+  color: var(--fz-yellow);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .active .cursor {
+    animation: none;
+  }
+}
+
+.icon {
+  position: relative;
+  flex: none;
+  width: 1.8em;
+  height: 1.8em;
+  align-self: center;
+  font-size: 1em;
+}
+
+.icon app-pixel-sprite {
+  width: 100%;
+  height: 100%;
+}
+
+/* Abreviatura de la insignia, centrada sobre el azulejo. */
+.icon-text {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 0.6em;
+  color: #ffffff;
+}

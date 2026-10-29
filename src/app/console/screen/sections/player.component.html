@@ -1,0 +1,32 @@
+@let text = t().console.player;
+
+<section class="player" [attr.aria-label]="t().console.menu.player">
+  <img class="avatar" [src]="player.avatar" [alt]="text.avatarAlt" width="48" height="48" />
+
+  <div class="data">
+    <h2 class="name">{{ player.name }}</h2>
+
+    <dl class="stats">
+      <div>
+        <dt>{{ text.classLabel }}</dt>
+        <dd>{{ player.className[lang()] }}</dd>
+      </div>
+      <div>
+        <dt>{{ text.levelLabel }}</dt>
+        <dd>{{ player.level[lang()] }}</dd>
+      </div>
+      <div>
+        <dt>{{ text.languagesLabel }}</dt>
+        <dd>{{ player.languages }}</dd>
+      </div>
+    </dl>
+
+    <app-menu-list
+      [items]="shortcuts()"
+      [cursor]="cursor()"
+      [label]="text.shortcuts"
+      (point)="point.emit($event)"
+      (pick)="pick.emit($event)"
+    />
+  </div>
+</section>

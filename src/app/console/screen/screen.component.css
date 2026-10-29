@@ -1,0 +1,90 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 3% / 4%;
+  background: var(--fz-black);
+  /* Los tamaños se adaptan a la pantalla: chica en la Pocket, grande en el plano 3. */
+  container-type: size;
+  /* Se mira el ancho y el alto para que el menú de 8 ítems entre en pantallas bajas. */
+  --menu-size: clamp(9px, min(4.2cqw, 4.8cqh), 32px);
+  --title-size: clamp(14px, min(5cqw, 6.5cqh), 48px);
+  --small-size: clamp(8px, min(1.6cqw, 2.1cqh), 16px);
+}
+
+.stack {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5em;
+  padding: 6%;
+}
+
+.brand,
+.notice {
+  font-family: var(--font-pixel);
+  font-size: var(--small-size);
+  letter-spacing: 0.3em;
+}
+
+.brand {
+  color: var(--fz-blue-light);
+}
+
+.notice {
+  color: var(--fz-gray);
+}
+
+.name,
+.heading {
+  font-family: var(--font-pixel);
+  font-weight: 400;
+  font-size: var(--title-size);
+  color: var(--fz-white);
+  text-align: center;
+  text-shadow: 0.1em 0.1em 0 var(--fz-blue);
+}
+
+.heading {
+  font-size: var(--menu-size);
+}
+
+/* Capa CRT (RF-63): líneas de barrido, viñeta, curvatura simulada y parpadeo leve. */
+.crt {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background:
+    repeating-linear-gradient(to bottom, #00000040 0 1px, transparent 1px 3px),
+    radial-gradient(ellipse at center, transparent 55%, #0000008c 100%);
+  box-shadow: inset 0 0 6cqw #000000a0;
+  animation: flicker 5s steps(1) infinite;
+}
+
+@keyframes flicker {
+  48% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.85;
+  }
+  52% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .crt {
+    animation: none;
+  }
+}

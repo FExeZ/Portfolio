@@ -1,0 +1,111 @@
+:host,
+.boot {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.boot {
+  display: grid;
+  place-items: center;
+}
+
+/* Encendido del tubo: una línea que se abre a lo ancho y después a lo alto. */
+.tube {
+  position: absolute;
+  inset: 0;
+  background: var(--fz-white);
+  animation: tube-on 600ms ease-out forwards;
+}
+
+@keyframes tube-on {
+  0% {
+    transform: scale(0, 0.004);
+  }
+  50% {
+    transform: scale(1, 0.004);
+  }
+  100% {
+    transform: scale(1, 1);
+    opacity: 0;
+  }
+}
+
+/* Estática: dos tramas de líneas que se desplazan a saltos. */
+.static {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(0deg, #ffffff22 0 2px, transparent 2px 5px),
+    repeating-linear-gradient(90deg, #00000055 0 3px, #ffffff18 3px 4px, transparent 4px 9px),
+    var(--fz-gray);
+  animation: noise 120ms steps(3) infinite;
+}
+
+@keyframes noise {
+  to {
+    background-position:
+      0 37px,
+      23px 0,
+      0 0;
+  }
+}
+
+.logo {
+  font-family: var(--font-pixel);
+  font-size: var(--title-size, 32px);
+  color: var(--fz-white);
+  text-shadow: 0.12em 0.12em 0 var(--fz-blue);
+  animation: fade-in 300ms ease-out;
+}
+
+.fade-out {
+  animation: fade-out 400ms ease-in forwards;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+.skip {
+  position: absolute;
+  right: 4%;
+  bottom: 5%;
+  font-family: var(--font-pixel);
+  font-size: var(--small-size, 12px);
+  color: var(--fz-gray);
+}
+
+.skip::after {
+  content: '';
+  display: inline-block;
+  width: 0.6em;
+  height: 0.7em;
+  margin-left: 0.6em;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.skip:hover {
+  color: var(--fz-white);
+}
+
+/* RF-64: solo fundidos cortos. */
+@media (prefers-reduced-motion: reduce) {
+  .logo {
+    animation-duration: 200ms;
+  }
+
+  .fade-out {
+    animation-duration: 200ms;
+  }
+}

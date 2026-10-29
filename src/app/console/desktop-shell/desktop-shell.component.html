@@ -1,0 +1,75 @@
+<div
+  class="stage"
+  [class.moving]="moving()"
+  [style.transform]="camera()"
+  [style.transition-duration.ms]="cameraMs()"
+>
+  <!-- Habitación base: pared, piso y muebles. Los objetos los dibuja app-room-scene. -->
+  <app-room-base
+    class="room"
+    [on]="!off()"
+    [style.left.px]="room().left"
+    [style.top.px]="room().top"
+    [style.width.px]="room().width"
+    [style.height.px]="room().height"
+  />
+
+  <div class="slot" [style.width.px]="box().width" [style.height.px]="box().height">
+    <app-screen />
+  </div>
+
+  <!-- Después de la pantalla: el botón de la tele queda arriba de ella en "Sobre mí". -->
+  @let view = about();
+  <app-room-scene
+    [style.left.px]="room().left"
+    [style.top.px]="room().top"
+    [style.width.px]="room().width"
+    [style.height.px]="room().height"
+    [interactive]="exploring()"
+    [cursor]="view?.cursor ?? 0"
+    [pet]="view?.pet ?? null"
+    [highlight]="highlight()"
+    [cyclone]="store.state().cyclone"
+    (point)="store.dispatch({ type: 'point', index: $event })"
+    (pick)="store.dispatch({ type: 'pick', index: $event })"
+  />
+
+  @if (off()) {
+    <button
+      type="button"
+      class="power"
+      [attr.aria-label]="t().console.powerTv"
+      [style.left.px]="tv().left"
+      [style.top.px]="tv().top"
+      [style.width.px]="tv().width"
+      [style.height.px]="tv().height"
+      (click)="powerOn()"
+    ></button>
+  }
+</div>
+
+<!-- Fuera del escenario: no se mueve con la cámara y se ve en los tres planos (RF-61). -->
+<app-sound-toggle class="sound" />
+
+@if (off()) {
+  <p class="hint">{{ t().console.powerHint }}</p>
+}
+
+<!-- RF-30: el nombre del objeto marcado, fuera del escenario para que la cámara no lo achique. -->
+@if (objectName(); as name) {
+  <p class="object-name" aria-hidden="true">▶ {{ name }}</p>
+}
+
+<!-- Fuera del escenario y a tamaño real, en la parte de abajo que deja libre la cámara (RF-31). -->
+@if (dialog(); as content) {
+  <app-dialog-box
+    class="dialog"
+    [content]="content"
+    [typed]="store.typed()"
+    (advance)="store.dispatch({ type: 'confirm' })"
+  />
+}
+
+@if (fading()) {
+  <div class="fade" aria-hidden="true"></div>
+}

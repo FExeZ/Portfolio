@@ -1,0 +1,50 @@
+<svg
+  class="drawing"
+  aria-hidden="true"
+  preserveAspectRatio="none"
+  shape-rendering="crispEdges"
+  [attr.viewBox]="viewBox"
+>
+  @for (drawing of drawings(); track drawing.key) {
+    <g [attr.transform]="drawing.transform">
+      <g [class.hop]="drawing.hop">
+        @for (run of drawing.pixels; track $index) {
+          <rect [attr.x]="run.x" [attr.y]="run.y" [attr.width]="run.width" height="1" [attr.fill]="run.fill" />
+        }
+      </g>
+    </g>
+  }
+
+  @if (frame(); as box) {
+    <rect
+      class="frame"
+      fill="none"
+      stroke-width="3"
+      [attr.x]="box.x"
+      [attr.y]="box.y"
+      [attr.width]="box.width"
+      [attr.height]="box.height"
+    />
+  }
+</svg>
+
+@if (interactive()) {
+  <div class="hits" role="group" [attr.aria-label]="t().console.room.objects">
+    @for (hit of hits; track hit.index) {
+      <button
+        #hit
+        type="button"
+        class="hit"
+        data-console-item
+        [attr.aria-label]="hit.name[lang()]"
+        [style.left.%]="hit.left"
+        [style.top.%]="hit.top"
+        [style.width.%]="hit.width"
+        [style.height.%]="hit.height"
+        (pointermove)="onPointerMove(hit.index)"
+        (focus)="onFocus(hit.index)"
+        (click)="pick.emit(hit.index)"
+      ></button>
+    }
+  </div>
+}

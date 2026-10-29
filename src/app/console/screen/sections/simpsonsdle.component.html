@@ -1,0 +1,14 @@
+@let item = manual();
+
+<section class="simpsonsdle" [attr.aria-label]="t().console.menu.simpsonsdle">
+  @if (view().stage === 'inserting') {
+    <app-cartridge-insert
+      [title]="item.title"
+      [sprite]="item.sprite"
+      [gold]="item.gold"
+      [status]="t().console.projects.inserting"
+    />
+  } @else {
+    <app-cartridge-manual [manual]="item" (activate)="pick.emit(0)" />
+  }
+</section>

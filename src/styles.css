@@ -1,191 +1,117 @@
-/* ── Google Fonts ─────────────────────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
-
-/* ── Variables Premium ────────────────────────────────────────── */
-:root {
-  --bg-color: #030712;
-  --text-color: #f3f4f6;
-  --primary-color: #3b82f6;
-  --primary-glow: rgba(59, 130, 246, 0.5);
-  --secondary-color: #8b5cf6;
-  --accent-color: #10b981;
-  --card-bg: rgba(17, 24, 39, 0.7);
-  --glass-bg: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.1);
-  --nav-bg: rgba(3, 7, 18, 0.8);
+/* ── Fuentes (OFL 1.1, licencias en src/fonts/) ─────────────────── */
+@font-face {
+  font-family: 'Press Start 2P';
+  src: url('./fonts/press-start-2p-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-/* ── Reset & Base ─────────────────────────────────────────────── */
-*, *::before, *::after {
+@font-face {
+  font-family: 'VT323';
+  src: url('./fonts/vt323-latin-400-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ── Tokens de la FZ-16 ──────────────────────────────────────────── */
+:root {
+  --fz-black: #06081a;
+  --fz-night: #0b1a5c;
+  --fz-blue: #1d3fd1;
+  --fz-blue-light: #8fb6ff;
+  --fz-red: #c42b2b;
+  /* El rojo de la marca da 3,5:1 sobre negro: para texto va uno más claro (RF-70). */
+  --fz-red-text: #ff6b6b;
+  --fz-yellow: #ffd23f;
+  --fz-white: #f4f6ff;
+  --fz-gray: #7f8bb8;
+
+  /* Pixel para títulos, menús y etiquetas; VT323 para textos largos (RF-65). */
+  --font-pixel: 'Press Start 2P', monospace;
+  --font-body: 'VT323', monospace;
+  /* VT323 es más chica que una fuente común: 22 px equivalen a unos 16 px. */
+  --body-size: 22px;
+}
+
+/* Tamaño de las etiquetas de los cartuchos. Registrado como longitud, se calcula donde se declara
+   (la pantalla, con sus unidades cq) y no dentro de cada estante, que también es contenedor. */
+@property --cart-size {
+  syntax: '<length>';
+  inherits: true;
+  initial-value: 10px;
+}
+
+/* Modo Ciclón (RF-71): la paleta azulgrana. El grana claro reemplaza al amarillo de acento y
+   al rojo de texto, y llega a 4,5:1 sobre todos los fondos (RF-70). */
+.cyclone {
+  --fz-blue: #1b3fa0;
+  --fz-red: #9e1b32;
+  --fz-red-text: #ff5c7a;
+  --fz-yellow: #ff5c7a;
+}
+
+/* ── Reset y base ───────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-html {
-  scroll-behavior: smooth;
+html,
+body {
+  height: 100%;
 }
 
 body {
-  background-color: var(--bg-color);
-  color: var(--text-color);
-  font-family: 'Outfit', sans-serif;
-  line-height: 1.6;
-  overflow-x: hidden;
+  background: var(--fz-black);
+  color: var(--fz-white);
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  line-height: 1.3;
+  /* La consola ocupa la vista; cada sección tiene su propio scroll. */
+  overflow: hidden;
 }
 
-/* ── Animaciones de Revelado ──────────────────────────────────── */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(40px);
-    filter: blur(5px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-    filter: blur(0);
-  }
-}
-
-.reveal {
-  opacity: 0;
-  transition: none;
-}
-
-.reveal-active {
-  animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.delay-1 { animation-delay: 0.2s; }
-.delay-2 { animation-delay: 0.4s; }
-.delay-3 { animation-delay: 0.6s; }
-
-/* ── Utilidades de Diseño ─────────────────────────────────────── */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-}
-
-.section-title {
-  font-size: 3rem;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 4rem;
-  background: linear-gradient(to right, #fff, #94a3b8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.highlight {
-  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* ── Botones Modernos ────────────────────────────────────────── */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.8rem 2rem;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
   border: none;
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
+  cursor: pointer;
 }
 
-.btn-primary {
-  background: var(--primary-color);
-  color: #fff;
-  box-shadow: 0 10px 20px -5px var(--primary-glow);
+/* Barras de scroll con los colores de la consola. */
+* {
+  scrollbar-color: var(--fz-blue) transparent;
+  scrollbar-width: thin;
 }
 
-.btn-primary:hover {
-  transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 15px 30px -5px var(--primary-glow);
-  background: #2563eb;
+/* ── Foco visible en todos los controles (RF-69) ─────────────────── */
+:focus-visible {
+  outline: 3px solid var(--fz-yellow);
+  outline-offset: 3px;
 }
 
-.btn-outline {
-  background: var(--glass-bg);
-  color: #fff;
-  border: 1px solid var(--glass-border);
-  backdrop-filter: blur(5px);
+/* ── Sin JavaScript: un mensaje breve con los links de contacto ───── */
+.noscript {
+  max-width: 40em;
+  margin: 0 auto;
+  padding: 32px 16px;
 }
 
-.btn-outline:hover {
-  background: rgba(255, 255, 255, 0.1);
-  border-color: #fff;
-  transform: translateY(-3px);
+.noscript p,
+.noscript ul {
+  margin-bottom: 12px;
 }
 
-/* ── Barra de Progreso de Scroll ────────────────────────────── */
-.scroll-progress {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 0%;
-  height: 3px;
-  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-  box-shadow: 0 0 15px var(--primary-glow);
-  z-index: 9999;
-  transition: width 0.1s ease-out;
+.noscript ul {
+  padding-left: 1.2em;
 }
 
-/* ── Glow Background (Spotlight) ────────────────────────────── */
-.background-glow {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  z-index: -1;
-  background: 
-    radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.08) 0%, transparent 60%);
-}
-
-.blob-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -2;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.blob {
-  position: absolute;
-  width: 600px;
-  height: 600px;
-  background: var(--primary-glow);
-  filter: blur(120px);
-  border-radius: 50%;
-  opacity: 0.15;
-  animation: float-blob 25s infinite alternate ease-in-out;
-}
-
-.blob-2 {
-  background: rgba(139, 92, 246, 0.15);
-  width: 400px;
-  height: 400px;
-  right: -100px;
-  top: 20%;
-  animation-delay: -5s;
-  animation-duration: 30s;
-}
-
-@keyframes float-blob {
-  0% { transform: translate(-20%, -20%) scale(1); }
-  50% { transform: translate(50%, 20%) scale(1.2); }
-  100% { transform: translate(100%, 80%) scale(0.9); }
+.noscript a {
+  color: var(--fz-yellow);
 }

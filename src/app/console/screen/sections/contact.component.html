@@ -1,0 +1,21 @@
+@let text = t().console.contact;
+
+<section class="contact" [attr.aria-label]="t().console.menu.contact">
+  <h2 class="player2">{{ text.player2 }}</h2>
+
+  @if (joined()) {
+    <app-menu-list
+      [items]="links"
+      [cursor]="cursor()"
+      [label]="text.links"
+      (point)="point.emit($event)"
+      (pick)="pick.emit($event)"
+    />
+  } @else {
+    <button #start data-console-item type="button" class="start" (click)="join.emit()">
+      {{ text.pressStart }}
+    </button>
+  }
+
+  <p class="message">{{ message() }}</p>
+</section>

@@ -1,0 +1,88 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.projects,
+.shelf-screen {
+  height: 100%;
+}
+
+.shelf-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+  padding: 4% 6%;
+  font-family: var(--font-pixel);
+  font-size: var(--menu-size);
+  /* Etiquetas: sin nombre en la Pocket, con nombre en la tele. */
+  --cart-title-display: none;
+  --cart-size: calc(var(--small-size) * 0.8);
+}
+
+/* Con el cartucho secreto hay cuatro estantes: los cartuchos miden 3/4 del alto y los nombres también. */
+.shelf-screen.four-shelves {
+  --cart-size: calc(var(--small-size) * 0.6);
+}
+
+.heading {
+  font-size: 1em;
+  font-weight: 400;
+  text-align: center;
+  color: var(--fz-white);
+}
+
+/* Tres estantes de madera con tres cartuchos cada uno; el cartucho secreto suma un cuarto (RF-74). */
+.shelf {
+  list-style: none;
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  /* minmax(0, …): con cuatro estantes, los cartuchos se achican en lugar de salirse de la pantalla. */
+  grid-auto-rows: minmax(0, 1fr);
+  column-gap: 8%;
+  padding: 0 4%;
+  font-size: 0.7em;
+}
+
+.shelf li {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  border-bottom: 0.4em solid #5a3d25;
+  padding-bottom: 0.3em;
+  /* Cada estante mide al cartucho: así entra a lo ancho y a lo alto, con tres o cuatro estantes. */
+  container-type: size;
+}
+
+.slot {
+  width: min(100cqw, 125cqh);
+  aspect-ratio: 5 / 4;
+  display: block;
+}
+
+.slot app-cartridge {
+  height: 100%;
+}
+
+/* El cartucho activo ya se marca con su borde amarillo. */
+.slot:focus-visible {
+  outline: none;
+}
+
+.caption {
+  font-size: var(--small-size);
+  text-align: center;
+  color: var(--fz-yellow);
+}
+
+@container (min-width: 600px) {
+  .shelf-screen {
+    --cart-title-display: block;
+  }
+
+  .caption {
+    display: none;
+  }
+}

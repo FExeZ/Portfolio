@@ -1,0 +1,14 @@
+<section #section class="credits" tabindex="-1" [attr.aria-label]="t().console.menu.credits">
+  <div class="roll">
+    <dl>
+      @for (line of credits; track $index) {
+        <div class="line">
+          <dt>{{ line.role[lang()] }}</dt>
+          <dd>{{ line.name }}</dd>
+        </div>
+      }
+    </dl>
+    <p class="end">{{ end }}</p>
+    <p class="copyright">{{ copyright[lang()] }}</p>
+  </div>
+</section>

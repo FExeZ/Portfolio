@@ -1,0 +1,85 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.host {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+/* RF-66: arriba a la izquierda, encima de la carcasa. */
+.text-link {
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  z-index: 1;
+  padding: 4px 6px;
+  font-family: var(--font-pixel);
+  font-size: 10px;
+  line-height: 1.4;
+  color: var(--fz-yellow);
+  background: #06081acc;
+}
+
+/* En el resto de las pantallas, oculto hasta que recibe el foco: "saltar al contenido". */
+.text-link.skip:not(:focus) {
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* El cartel de los secretos: arriba al centro, debajo del link al modo texto. */
+.notice {
+  position: absolute;
+  inset: 40px 16px auto;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.notice-box {
+  padding: 12px 16px;
+  font-family: var(--font-pixel);
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+  color: var(--fz-yellow);
+  background: var(--fz-black);
+  border: 4px solid var(--fz-blue);
+  box-shadow: inset 0 0 0 2px var(--fz-red);
+  animation: notice-in 320ms steps(4);
+}
+
+@keyframes notice-in {
+  from {
+    transform: translateY(-48px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .notice-box {
+    animation: none;
+  }
+}
+
+/* Arriba: abajo taparía el botón de silencio y Start de la Pocket apaisada (RF-61). */
+.rotate-hint {
+  position: absolute;
+  inset: 8px 16px auto;
+  text-align: center;
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--fz-yellow);
+  background: #000000cc;
+  padding: 8px;
+}

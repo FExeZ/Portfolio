@@ -1,0 +1,49 @@
+@let text = t().console.projects;
+@let open = view().open;
+
+<section class="projects" [attr.aria-label]="t().console.menu.projects">
+  @if (open && open.stage === 'inserting') {
+    <app-cartridge-insert
+      [title]="selected().title"
+      [sprite]="selected().sprite"
+      [gold]="selected().gold"
+      [status]="text.inserting"
+    />
+  } @else if (open?.snake; as game) {
+    <app-snake [game]="game" [record]="snakeRecord()" (retry)="pick.emit(0)" />
+  } @else if (manual(); as item) {
+    <app-cartridge-manual [manual]="item" (activate)="pick.emit(0)" />
+  } @else {
+    <div class="shelf-screen" [class.four-shelves]="secretFound()">
+      <h2 class="heading">{{ t().console.menu.projects }}</h2>
+
+      <ul class="shelf" [attr.aria-label]="text.shelf">
+        @for (cartridge of shelf(); track $index) {
+          <li>
+            <button
+              #slot
+              data-console-item
+              type="button"
+              class="slot"
+              [attr.tabindex]="$index === view().cursor ? 0 : -1"
+              [attr.aria-current]="$index === view().cursor ? 'true' : null"
+              [attr.aria-label]="cartridge.title"
+              (pointermove)="onPointerMove($index)"
+              (click)="pick.emit($index)"
+            >
+              <app-cartridge
+                [title]="cartridge.title"
+                [sprite]="cartridge.sprite"
+                [gold]="cartridge.gold"
+                [active]="$index === view().cursor"
+              />
+            </button>
+          </li>
+        }
+      </ul>
+
+      <!-- El nombre del cartucho marcado, para cuando las etiquetas son chicas (Pocket). -->
+      <p class="caption" aria-hidden="true">{{ selected().title }}</p>
+    </div>
+  }
+</section>

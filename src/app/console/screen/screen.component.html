@@ -1,0 +1,97 @@
+@let text = t().console;
+
+<div class="screen">
+  @switch (screen().kind) {
+    @case ('boot') {
+      <app-boot
+        [step]="store.bootStep()"
+        [brand]="text.brand"
+        [skipLabel]="text.skip"
+        (skip)="dispatch({ type: 'skip' })"
+      />
+    }
+    @case ('title') {
+      <div class="stack">
+        <p class="brand">{{ text.brand }}</p>
+        <h1 class="name">{{ text.playerName }}</h1>
+        <app-menu-list
+          [items]="entries()"
+          [cursor]="cursor()"
+          [label]="text.brand"
+          (point)="dispatch({ type: 'point', index: $event })"
+          (pick)="dispatch({ type: 'pick', index: $event })"
+        />
+        <p class="notice">{{ text.withSound }}</p>
+      </div>
+    }
+    @case ('menu') {
+      <div class="stack">
+        <app-menu-list
+          [items]="entries()"
+          [cursor]="cursor()"
+          [label]="text.label"
+          (point)="dispatch({ type: 'point', index: $event })"
+          (pick)="dispatch({ type: 'pick', index: $event })"
+        />
+      </div>
+    }
+    @case ('options') {
+      <div class="stack">
+        <h2 class="heading">{{ text.menu.options }}</h2>
+        <app-menu-list
+          [items]="entries()"
+          [cursor]="cursor()"
+          [label]="text.menu.options"
+          (point)="dispatch({ type: 'point', index: $event })"
+          (pick)="dispatch({ type: 'pick', index: $event })"
+        />
+      </div>
+    }
+    @case ('section') {
+      @if (playerView(); as player) {
+        <app-player-section
+          [cursor]="player.cursor"
+          (point)="dispatch({ type: 'point', index: $event })"
+          (pick)="dispatch({ type: 'pick', index: $event })"
+        />
+      } @else if (skillsView(); as skills) {
+        <app-skills-section
+          [tab]="skills.tab"
+          [cursor]="skills.cursor"
+          (point)="dispatch({ type: 'point', index: $event })"
+          (pick)="dispatch({ type: 'pick', index: $event })"
+          (selectTab)="dispatch({ type: 'selectTab', index: $event })"
+        />
+      } @else if (projectsView(); as projects) {
+        <app-projects-section
+          [view]="projects"
+          [secretFound]="store.state().secretFound"
+          [snakeRecord]="store.state().snakeRecord"
+          (point)="dispatch({ type: 'point', index: $event })"
+          (pick)="dispatch({ type: 'pick', index: $event })"
+        />
+      } @else if (simpsonsdleView(); as simpsonsdle) {
+        <app-simpsonsdle-section
+          [view]="simpsonsdle"
+          (pick)="dispatch({ type: 'pick', index: $event })"
+        />
+      } @else if (contactView(); as contact) {
+        <app-contact-section
+          [joined]="contact.joined"
+          [cursor]="contact.cursor"
+          (join)="dispatch({ type: 'confirm' })"
+          (point)="dispatch({ type: 'point', index: $event })"
+          (pick)="dispatch({ type: 'pick', index: $event })"
+        />
+      } @else if (sectionId() === 'credits') {
+        <app-credits-section />
+      } @else if (sectionId() === 'about') {
+        <app-about-section [pocket]="pocket()" />
+      }
+    }
+  }
+
+  @if (crt()) {
+    <div class="crt" aria-hidden="true"></div>
+  }
+</div>

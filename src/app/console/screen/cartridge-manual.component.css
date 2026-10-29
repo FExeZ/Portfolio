@@ -1,0 +1,132 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+/* Si el texto no entra, el manual tiene su propio scroll (las flechas lo mueven). */
+.manual {
+  height: 100%;
+  overflow-y: auto;
+  display: grid;
+  align-content: start;
+  gap: 0.9em;
+  /* Sin padding abajo: el link pegado cubre ese espacio (si no, el texto se ve por debajo). */
+  padding: 6% 7% 0;
+  font-family: var(--font-pixel);
+  font-size: var(--menu-size);
+  /* 2.5cqw: la historia de Simpsonsdle entra entera en la tele, sin scroll. */
+  --text-size: clamp(20px, 2.5cqw, 30px);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  flex-wrap: wrap;
+}
+
+.icon {
+  width: 1.6em;
+  height: 1.6em;
+}
+
+.title {
+  font-size: 1em;
+  font-weight: 400;
+  color: var(--fz-white);
+  text-shadow: 0.1em 0.1em 0 var(--fz-blue);
+}
+
+.gold .title {
+  color: var(--fz-yellow);
+}
+
+.live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-left: auto;
+  font-size: var(--small-size);
+  color: #ff6b6b;
+}
+
+.live .dot {
+  width: 0.7em;
+  height: 0.7em;
+  background: #ff3b3b;
+  animation: blink 1s steps(1) infinite;
+}
+
+.text {
+  font-family: var(--font-body);
+  font-size: var(--text-size);
+  line-height: 1.25;
+  color: var(--fz-white);
+}
+
+.subtitle {
+  font-size: var(--small-size);
+  font-weight: 400;
+  color: var(--fz-gray);
+}
+
+.chips {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+}
+
+.chip {
+  padding: 0.35em 0.6em;
+  font-size: var(--small-size);
+  color: var(--fz-blue-light);
+  border: 2px solid var(--fz-blue);
+}
+
+/* Pegado abajo: aunque el texto sea largo, el link siempre se ve. */
+.action {
+  position: sticky;
+  bottom: 0;
+  padding-block: 0.4em 1.2em;
+  background: var(--fz-black);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  color: var(--fz-yellow);
+  text-decoration: none;
+}
+
+/* El link es el único control: el cursor triangular lo marca siempre. */
+.action .cursor {
+  width: 0.7em;
+  height: 0.8em;
+  background: var(--fz-yellow);
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  animation: blink 1s steps(1) infinite;
+}
+
+.action:focus-visible {
+  outline: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .live .dot,
+  .action .cursor {
+    animation: none;
+  }
+}

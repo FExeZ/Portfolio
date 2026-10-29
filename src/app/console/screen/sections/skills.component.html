@@ -1,0 +1,72 @@
+@let text = t().console.skills;
+
+<section class="skills" [attr.aria-label]="t().console.menu.skills">
+  <!-- Página de la categoría: flechas para cambiar y un punto por categoría (← → en el teclado). -->
+  <header class="pager">
+    <button
+      type="button"
+      class="arrow previous"
+      [attr.aria-label]="text.previous"
+      (click)="selectTab.emit(previousTab())"
+    ></button>
+    <h2 class="tab-title">{{ tabTitle() }}</h2>
+    <button
+      type="button"
+      class="arrow next"
+      [attr.aria-label]="text.next"
+      (click)="selectTab.emit(nextTab())"
+    ></button>
+  </header>
+
+  <div class="dots" role="tablist" [attr.aria-label]="text.tabs">
+    @for (title of tabTitles(); track $index) {
+      <button
+        type="button"
+        role="tab"
+        class="dot"
+        tabindex="-1"
+        [class.active]="$index === tab()"
+        [attr.aria-selected]="$index === tab()"
+        [attr.aria-label]="title"
+        (click)="selectTab.emit($index)"
+      ></button>
+    }
+  </div>
+
+  <div class="body">
+    <app-menu-list
+      class="list"
+      [class.achievements]="onAchievements()"
+      [items]="items()"
+      [cursor]="cursor()"
+      [label]="tabTitle()"
+      (point)="point.emit($event)"
+      (pick)="pick.emit($event)"
+    />
+
+    <!-- El lector de pantalla anuncia la descripción cada vez que se mueve el cursor. -->
+    <div class="detail" aria-live="polite">
+      @if (detail(); as item) {
+        @if (item.kind === 'skill') {
+          <div class="detail-head">
+            <span class="badge" aria-hidden="true">
+              <app-pixel-sprite [sprite]="item.icon" />
+              <span class="badge-text">{{ item.short }}</span>
+            </span>
+            <h3 class="detail-title">{{ item.title }}</h3>
+          </div>
+          <p class="description">{{ item.description }}</p>
+        } @else {
+          <div class="detail-head">
+            <span class="badge" aria-hidden="true">
+              <app-pixel-sprite [sprite]="achievementSprite" />
+            </span>
+            <p class="unlocked">{{ text.unlocked }}</p>
+          </div>
+          <h3 class="detail-title">{{ item.title }}</h3>
+          <p class="description">{{ item.issuer }}</p>
+        }
+      }
+    </div>
+  </div>
+</section>

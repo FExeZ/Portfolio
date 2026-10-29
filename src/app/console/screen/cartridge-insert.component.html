@@ -1,0 +1,8 @@
+<div class="insert">
+  <p class="status" role="status">{{ status() }}</p>
+  <app-cartridge class="moving" [title]="title()" [sprite]="sprite()" [gold]="gold()" />
+  <!-- Frente de la consola: el cartucho desaparece detrás, como si entrara en la ranura. -->
+  <div class="console" aria-hidden="true">
+    <div class="slot"></div>
+  </div>
+</div>

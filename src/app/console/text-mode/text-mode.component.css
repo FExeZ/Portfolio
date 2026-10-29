@@ -1,0 +1,110 @@
+/* La consola bloquea el scroll de la página; el modo texto tiene el suyo. */
+:host {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  background: var(--fz-black);
+}
+
+.page {
+  max-width: 70ch;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+  font-family: var(--font-body);
+  font-size: var(--body-size);
+  line-height: 1.35;
+  color: var(--fz-white);
+}
+
+.bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+footer.bar {
+  margin: 48px 0 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-pixel);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+h1:focus {
+  outline: none;
+}
+
+h2 {
+  font-size: 18px;
+  margin: 48px 0 16px;
+  padding-bottom: 8px;
+  color: var(--fz-yellow);
+  border-bottom: 2px solid var(--fz-blue);
+}
+
+h3 {
+  font-size: 13px;
+  margin: 28px 0 10px;
+  color: var(--fz-blue-light);
+}
+
+p,
+ul {
+  margin-bottom: 12px;
+}
+
+ul {
+  padding-left: 1.2em;
+}
+
+li + li {
+  margin-top: 6px;
+}
+
+.intro,
+.links {
+  list-style: none;
+  padding-left: 0;
+}
+
+a {
+  color: var(--fz-yellow);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.back {
+  font-family: var(--font-pixel);
+  font-size: 12px;
+}
+
+.language {
+  padding: 8px 12px;
+  border: 2px solid var(--fz-blue-light);
+  background: none;
+  font-family: var(--font-pixel);
+  font-size: 12px;
+  color: var(--fz-white);
+  cursor: pointer;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

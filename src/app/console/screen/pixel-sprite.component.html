@@ -1,0 +1,11 @@
+<svg
+  [attr.viewBox]="viewBox()"
+  shape-rendering="crispEdges"
+  [attr.role]="label() ? 'img' : null"
+  [attr.aria-label]="label() ?? null"
+  [attr.aria-hidden]="label() ? null : 'true'"
+>
+  @for (run of pixels(); track $index) {
+    <rect [attr.x]="run.x" [attr.y]="run.y" [attr.width]="run.width" height="1" [attr.fill]="run.fill" />
+  }
+</svg>

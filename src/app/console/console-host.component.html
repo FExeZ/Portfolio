@@ -1,0 +1,30 @@
+@if (store.textMode()) {
+  <app-text-mode />
+} @else {
+  <main
+    class="host"
+    [class.cyclone]="store.state().cyclone"
+    [attr.aria-label]="t().console.label"
+    [attr.data-shell]="shell().shell"
+  >
+    <!-- RF-66: lo primero de Tab en cualquier pantalla; en el resto aparece al recibir el foco. -->
+    <a class="text-link" href="#/text" [class.skip]="!textLinkVisible()">{{ t().console.textMode.link }}</a>
+
+    @if (shell().shell === 'desktop') {
+      <app-desktop-shell [viewport]="viewport()" />
+    } @else {
+      <app-pocket-shell />
+    }
+
+    @if (shell().rotateHint) {
+      <p class="rotate-hint" role="status">{{ t().console.rotateHint }}</p>
+    }
+
+    <!-- RF-71: siempre en el DOM, así el lector de pantalla lee el cartel cuando aparece. -->
+    <p class="notice" role="status">
+      @if (store.notice(); as notice) {
+        <span class="notice-box">{{ t().console.notice[notice] }}</span>
+      }
+    </p>
+  </main>
+}

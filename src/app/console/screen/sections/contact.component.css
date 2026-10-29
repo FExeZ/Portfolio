@@ -1,0 +1,51 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.contact {
+  height: 100%;
+  overflow-y: auto;
+  display: grid;
+  /* safe: si no entra (Pocket), arranca arriba y se scrollea, sin cortar "PLAYER 2". */
+  align-content: safe center;
+  justify-items: center;
+  gap: 1.4em;
+  padding: 7%;
+  font-family: var(--font-pixel);
+  font-size: var(--menu-size);
+  text-align: center;
+}
+
+.player2 {
+  font-size: var(--title-size);
+  font-weight: 400;
+  color: var(--fz-red-text);
+  text-shadow: 0.1em 0.1em 0 var(--fz-black), 0.15em 0.15em 0 var(--fz-yellow);
+}
+
+.start {
+  font-size: 1em;
+  color: var(--fz-yellow);
+  animation: blink 1s steps(1) infinite;
+}
+
+.message {
+  max-width: 34em;
+  font-family: var(--font-body);
+  font-size: clamp(20px, 2.5cqw, 30px);
+  line-height: 1.25;
+  color: var(--fz-blue-light);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .start {
+    animation: none;
+  }
+}

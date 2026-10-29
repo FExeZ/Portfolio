@@ -1,0 +1,152 @@
+:host {
+  display: block;
+  height: 100%;
+}
+
+.skills {
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  padding: 5% 6%;
+  font-family: var(--font-pixel);
+  font-size: var(--menu-size);
+  /* VT323 es más chica que otras fuentes al mismo tamaño: 20 px en la Pocket, hasta 30 px en la tele (RF-65). */
+  --text-size: clamp(20px, 3.2cqw, 30px);
+}
+
+.pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.tab-title {
+  font-size: 1em;
+  font-weight: 400;
+  color: var(--fz-white);
+  text-align: center;
+}
+
+/* Flechas dibujadas: los caracteres ◀ ▶ no están en la fuente. */
+.arrow {
+  flex: none;
+  width: 1em;
+  height: 1em;
+  background: var(--fz-yellow);
+  clip-path: polygon(0 50%, 100% 0, 100% 100%);
+}
+
+.arrow.next {
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+}
+
+.arrow:hover {
+  background: var(--fz-white);
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.6em;
+}
+
+.dot {
+  width: 0.5em;
+  height: 0.5em;
+  background: var(--fz-gray);
+}
+
+.dot.active {
+  background: var(--fz-yellow);
+}
+
+/* En la Pocket: una columna de insignias, como casilleros de un inventario, y el detalle al lado. */
+.body {
+  flex: 1;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1em;
+  align-content: start;
+  font-size: 0.8em;
+}
+
+/* Los ítems usan --menu-size: más chica que en el menú, para que los nombres entren en una línea. */
+.list {
+  --menu-size: clamp(11px, 2.6cqw, 22px);
+  --menu-label-display: none;
+}
+
+/* Los títulos de las certificaciones son largos; completos se leen en el detalle. */
+.list.achievements {
+  --menu-size: clamp(10px, 1.9cqw, 17px);
+}
+
+/* En la tele: lista a la izquierda y detalle a la derecha. */
+@container (min-width: 600px) {
+  .body {
+    grid-template-columns: 1fr 1.2fr;
+    align-content: center;
+  }
+
+  .list {
+    --menu-label-display: inline;
+  }
+}
+
+.detail {
+  display: grid;
+  gap: 0.8em;
+  align-content: start;
+  padding: 0.8em;
+  border: 2px solid var(--fz-blue);
+  min-height: 6em;
+}
+
+.detail-head {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+}
+
+.badge {
+  position: relative;
+  flex: none;
+  width: 2.4em;
+  height: 2.4em;
+}
+
+.badge app-pixel-sprite {
+  width: 100%;
+  height: 100%;
+}
+
+.badge-text {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 0.75em;
+  color: #ffffff;
+}
+
+.detail-title {
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--fz-yellow);
+}
+
+.unlocked {
+  font-size: 0.8em;
+  color: var(--fz-yellow);
+}
+
+.description {
+  font-family: var(--font-body);
+  font-size: var(--text-size);
+  line-height: 1.25;
+  color: var(--fz-white);
+}

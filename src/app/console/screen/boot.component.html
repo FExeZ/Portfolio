@@ -1,0 +1,18 @@
+<div class="boot">
+  @switch (step()) {
+    @case ('tube') {
+      <div class="tube" aria-hidden="true"></div>
+    }
+    @case ('static') {
+      <div class="static" aria-hidden="true"></div>
+    }
+    @case ('logo') {
+      <p class="logo">{{ brand() }}</p>
+    }
+    @case ('fadeToTitle') {
+      <p class="logo fade-out">{{ brand() }}</p>
+    }
+  }
+
+  <button type="button" class="skip" (click)="skip.emit()">{{ skipLabel() }}</button>
+</div>

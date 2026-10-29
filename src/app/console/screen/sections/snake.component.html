@@ -1,0 +1,49 @@
+@let text = t().console.snake;
+@let snake = game();
+
+<section class="snake" [attr.aria-label]="title[lang()]">
+  <p class="hud">
+    <span>{{ text.score }} {{ snake.score }}</span>
+    <span class="best">{{ text.best }} {{ record() }}</span>
+  </p>
+
+  <div class="field">
+    <svg role="img" shape-rendering="crispEdges" [attr.aria-label]="text.board" [attr.viewBox]="viewBox">
+      <rect class="board" x="0" y="0" [attr.width]="columns" [attr.height]="rows" />
+      <rect class="food" width="0.7" height="0.7" [attr.x]="snake.food.x + 0.15" [attr.y]="snake.food.y + 0.15" />
+      @for (cell of snake.body; track $index) {
+        <rect
+          class="cell"
+          width="0.88"
+          height="0.88"
+          [class.head]="$first"
+          [attr.x]="cell.x + 0.06"
+          [attr.y]="cell.y + 0.06"
+        />
+      }
+    </svg>
+
+    <!-- RF-77: el Game Over va encima del tablero. Siempre en el DOM, así el lector de pantalla lo lee. -->
+    <div class="overlay" role="status">
+      @if (snake.status === 'over') {
+        <div class="box">
+          <p class="big">{{ text.gameOver }}</p>
+          <p>{{ text.score }} {{ snake.score }} · {{ text.best }} {{ record() }}</p>
+          <button #retryButton type="button" class="retry" (click)="retry.emit()">{{ text.retry }}</button>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- Inicio y pausa, debajo del tablero: así no tapan a la serpiente. -->
+  <p class="message" role="status">
+    @switch (snake.status) {
+      @case ('ready') {
+        {{ text.hint }}
+      }
+      @case ('paused') {
+        <span class="big">{{ text.paused }}</span> {{ text.resume }}
+      }
+    }
+  </p>
+</section>

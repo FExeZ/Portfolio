@@ -1,5 +1,6 @@
 import { Injectable, computed, signal } from '@angular/core';
 import { Lang, TRANSLATIONS, Translations } from '../i18n/translations';
+import { pickInitialLang } from '../console/core/preferences';
 
 const STORAGE_KEY = 'lang';
 
@@ -30,14 +31,12 @@ export class LanguageService {
   }
 
   private detectInitial(): Lang {
+    let saved: string | null = null;
     try {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      if (saved === 'es' || saved === 'en') {
-        return saved;
-      }
+      saved = localStorage.getItem(STORAGE_KEY);
     } catch {
       /* localStorage no disponible */
     }
-    return navigator.language?.toLowerCase().startsWith('en') ? 'en' : 'es';
+    return pickInitialLang(saved, navigator.language);
   }
 }

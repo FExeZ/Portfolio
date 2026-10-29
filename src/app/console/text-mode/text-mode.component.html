@@ -1,0 +1,66 @@
+@let text = t().console;
+@let page = content();
+
+<main class="page">
+  <header class="bar">
+    <a class="back" [href]="store.consoleHash()"><span aria-hidden="true">← </span>{{ text.textMode.back }}</a>
+    <button type="button" class="language" [attr.lang]="otherLang()" (click)="toggleLanguage()">
+      {{ text.textMode.language }}
+    </button>
+  </header>
+
+  <h1 #heading tabindex="-1">{{ page.title }}</h1>
+  <ul class="intro">
+    @for (item of page.intro; track $index) {
+      <li><strong>{{ item.term }}:</strong> {{ item.text }}</li>
+    }
+  </ul>
+
+  @for (section of page.sections; track section.id) {
+    <section [attr.aria-labelledby]="'text-' + section.id">
+      <h2 [id]="'text-' + section.id">{{ section.title }}</h2>
+      @for (block of section.blocks; track $index) {
+        @switch (block.kind) {
+          @case ('subheading') {
+            <h3>{{ block.text }}</h3>
+          }
+          @case ('paragraph') {
+            <p>{{ block.text }}</p>
+          }
+          @case ('list') {
+            <ul>
+              @for (item of block.items; track $index) {
+                <li>
+                  @if (item.term) {
+                    <strong>{{ item.term }}:</strong>
+                  }
+                  {{ item.text }}
+                </li>
+              }
+            </ul>
+          }
+          @case ('links') {
+            <ul class="links">
+              @for (link of block.links; track link.url) {
+                <li>
+                  <a
+                    [href]="link.url"
+                    [attr.target]="link.newTab ? '_blank' : null"
+                    [attr.rel]="link.newTab ? 'noopener' : null"
+                  >
+                    <!-- En una sola línea: un salto de línea dejaría un espacio antes de los dos puntos. -->
+                    {{ link.label }}@if (link.context) {<span class="sr-only">: {{ link.context }}</span>}@if (link.newTab) {<span class="sr-only"> {{ text.projects.opensNewTab }}</span>}
+                  </a>
+                </li>
+              }
+            </ul>
+          }
+        }
+      }
+    </section>
+  }
+
+  <footer class="bar">
+    <a class="back" [href]="store.consoleHash()"><span aria-hidden="true">← </span>{{ text.textMode.back }}</a>
+  </footer>
+</main>
